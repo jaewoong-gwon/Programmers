@@ -9,7 +9,7 @@ class Solution {
         });
         
         for(int i : scoville) queue.add(i);
-        
+         
         int sum = 0;
         int min = queue.peek();
         while(K > min && queue.size() > 1){
@@ -29,12 +29,6 @@ class Solution {
         if(min < K) return -1;
         
         return answer;
-    }
-
-    
-    static boolean check(int k){
-        if(queue.isEmpty()) return false; // 비어있어도 아래의 코드는 true를 리턴함.
-        return queue.stream().allMatch(item -> item >= k);
     }
     
     static void print(){
