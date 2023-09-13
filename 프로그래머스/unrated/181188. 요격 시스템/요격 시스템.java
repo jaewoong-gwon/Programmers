@@ -6,12 +6,13 @@ class Solution {
         Arrays.sort(targets,(int[] o1, int[] o2)->{
             return o1[0] - o2[0];
         });
-        /*
-        for(int[] arr : targets){
-            for(int i : arr) System.out.print(i + " ");
-            System.out.println("");
-        }
-        */
+        
+        
+        // for(int[] arr : targets){
+        //     for(int i : arr) System.out.print(i + " ");
+        //     System.out.println("");
+        // }
+        
         
         int s = targets[0][0];
         int e = targets[0][1];
