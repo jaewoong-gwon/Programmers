@@ -6,14 +6,18 @@ public class Main {
         BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(System.out));
 
         char[] arr = reader.readLine().toCharArray();
-        int idx = arr.length - 1;
+        int start = 0;
+        int end = arr.length - 1;
         boolean flag = false;
-        for(int i = 0; i < arr.length / 2; i++){
-            if(arr[i] != arr[idx--]) {
+
+
+        while(start != end && start <= end){
+            if(arr[start++] != arr[end--]){
                 flag = true;
                 break;
             }
         }
+
         if(flag) writer.write("0");
         else writer.write("1");
 
