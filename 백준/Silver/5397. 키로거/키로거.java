@@ -1,42 +1,41 @@
 import java.io.*;
-import java.util.Stack;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        int testCase = Integer.parseInt(br.readLine());
-        for (int i = 0; i < testCase; i++) {
-            char[] array = br.readLine().toCharArray();
-            Stack<Character> left = new Stack<>();
-            Stack<Character> right = new Stack<>();
-            for(char c : array){
+
+
+        int N = Integer.parseInt(br.readLine());
+        while(N-- > 0){
+            List<Character> list = new LinkedList<>();
+            ListIterator<Character> iterator = list.listIterator();
+            char[] arr = br.readLine().toCharArray();
+            for(char c : arr){
                 switch (c){
                     case '<':
-                        if(!left.isEmpty()) right.push(left.pop());
+                        if(iterator.hasPrevious()) iterator.previous();
                         break;
                     case '>':
-                        if(!right.isEmpty()) left.push(right.pop());
+                        if(iterator.hasNext()) iterator.next();
                         break;
                     case '-':
-                        if (!left.isEmpty()) left.pop();
+                        if(iterator.hasPrevious()){
+                            iterator.previous();
+                            iterator.remove();
+                        }
                         break;
                     default:
-                        left.push(c);
+                        iterator.add(c);
                         break;
                 }
             }
-            while (!right.isEmpty()) {
-                left.push(right.pop());
-            }
-
-            StringBuilder sb = new StringBuilder();
-            for (int k = 0; k < left.size(); k++) {
-                sb.append(left.elementAt(k));
-            }
-            bw.write(sb.toString() + "\n");
+            for(Character ch : list) bw.write(ch);
+            if(N >= 1) bw.write("\n");
         }
-        br.close();
+        bw.flush();
         bw.close();
+        br.close();
     }
 }
