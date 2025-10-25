@@ -10,7 +10,7 @@ class Solution {
         */
         int answer = 0;
         for(int i = 0; i < timelogs.length; i++) {
-            int time = getDesireTime(schedules[i] + 10);
+            int time = getDesiredTime(schedules[i] + 10);
             //System.out.println(time);
             int count = 0;
             for(int j = 0; j < timelogs[i].length; j++) {
@@ -31,10 +31,9 @@ class Solution {
         return day % 7 == 6 || day % 7 == 0;
     }
     
-    int getDesireTime(int time) {
+    int getDesiredTime(int time) {
         // 4 자리로 만들기
-        String strTime = Integer.toString(time);
-        if(strTime.length() == 3) strTime = "0" + strTime;
+        String strTime = String.format("%04d", time);
         
         // 2개씩 쪼개기
         String hour = strTime.substring(0,2);
@@ -44,15 +43,10 @@ class Solution {
         int h = Integer.parseInt(hour);
         int m = Integer.parseInt(minute);
         
-        if(m >= 60){
-            if(++h < 10) hour = "0" + Integer.toString(h);
-            else hour = Integer.toString(h);
-            m = m % 60;
-            if(m < 10) minute = "0" + Integer.toString(m);
-            else minute = Integer.toString(m);
-        }
-        
-        return Integer.parseInt(hour + minute);
+        h += m / 60;
+        m = m % 60;
+
+        return Integer.parseInt(String.format("%02d%02d", h, m));
     }
     
     
